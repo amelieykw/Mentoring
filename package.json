@@ -47,7 +47,6 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "chart.js": "^2.9.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
