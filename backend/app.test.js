@@ -56,6 +56,7 @@ describe('POST /prices', () => {
     expect(response.status).toBe(201);
     expect(response.body.success).toBe('true');
     expect(response.body.message).toBe('new price added successfully');
+    // eslint-disable-next-line max-len
     expect(response.body.newData).toStrictEqual([{ timeStamp: 325, price: 3243 }, { timeStamp: 1000, price: 100 }]);
     done();
   });
