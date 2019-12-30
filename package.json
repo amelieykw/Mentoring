@@ -5,8 +5,8 @@
   "repository": "git@github.com:Jeffzholy/Mentoring.git",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint '**/*.js'",
-    "lint-fix": "eslint --fix '**/*.js'",
+    "lint": "eslint ./",
+    "lint-fix": "eslint --fix ./",
     "test": "jest",
     "test-watch": "jest --watch",
     "build": "yarn build-frontend && yarn build-backend",
