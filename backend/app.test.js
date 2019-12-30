@@ -48,7 +48,7 @@ describe('POST /prices', () => {
     done();
   });
 
-  it('when success posted, responds json : status code 201, success "true", message "new price added successfully" and an array of data which is newData', async (done) => {
+  it('when success, responds json : status code 201, success "true", message "new price added successfully" and an array of data which is newData', async (done) => {
     const response = await request(app)
       .post('/prices')
       .send([{ timeStamp: 325, price: 3243 }, { timeStamp: 1000, price: 100 }]);
