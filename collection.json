@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "09db30c8-7657-4320-908e-89d61b23b9e8",
+		"name": "postCollections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "it-1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "01b483f0-8ea7-42af-a1f2-6b3844637228",
+						"exec": [
+							"const timeStamp = new Date().getTime()",
+							"const rawPrice = 1000*Math.random()",
+							"const price = parseFloat(rawPrice.toFixed(2))",
+							"",
+							"const body = [{timeStamp, price}]",
+							"",
+							"pm.globals.set(\"body\",JSON.stringify(body))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc1ef341-63e6-4f19-9c8f-9e4fe0b14b5d",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.equal(201);",
+							"    pm.response.to.have.jsonBody([]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{body}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/prices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"prices"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
