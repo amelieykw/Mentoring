@@ -1,9 +1,9 @@
-import server, { app } from './app';
+import server from './app';
 import prices from './db';
 
 const request = require('supertest');
 
-server();
+const app = server();
 
 describe('GET /prices', () => {
   it('when success, responds json : status code 200, success "true", message "prices retrieved successfully" and an array of data which is pricesData', async (done) => {
