@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.use('/prices', pricesRouter);
 
-export default router;
+export default (app) => {
+  app.use('/', router);
+};
