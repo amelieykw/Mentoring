@@ -1,6 +1,9 @@
+import server, { app } from './app';
+import prices from './db';
+
 const request = require('supertest');
-const app = require('./app');
-const prices = require('./db');
+
+server();
 
 describe('GET /prices', () => {
   it('when success, responds json : status code 200, success "true", message "prices retrieved successfully" and an array of data which is pricesData', async (done) => {
@@ -9,7 +12,7 @@ describe('GET /prices', () => {
     expect(response.status).toBe(200);
     expect(response.body.success).toBe('true');
     expect(response.body.message).toBe('prices retrieved successfully');
-    expect(response.body.data).toStrictEqual(prices.default);
+    expect(response.body.data).toStrictEqual(prices);
     done();
   });
 });
