@@ -12,7 +12,7 @@ describe('test /prices routes', () => {
   });
 
   describe('GET /prices', () => {
-    it('when success, responds json : status code 200, an array of data which is all current prices!', async () => {
+    it('when success, responds json : status code 200, an array of data which is all current prices', async () => {
       const response = await request.get('/prices');
 
       expect(response.status).toBe(200);
