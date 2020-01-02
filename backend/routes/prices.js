@@ -35,7 +35,6 @@ pricesRouter.post('/', async (req, res) => {
   const incomingData = req.body;
 
   if (!Array.isArray(incomingData)) {
-
     return res.status(400).send({
       error: 'data format need to be an array',
     });
