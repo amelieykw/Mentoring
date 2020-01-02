@@ -20,6 +20,7 @@ pricesRouter.get('/', async (req, res) => {
   }
 
   res.set('count', pricesData.length);
+
   return res.status(200).send({
     data: pricesData,
   });
@@ -34,6 +35,7 @@ pricesRouter.post('/', async (req, res) => {
   const incomingData = req.body;
 
   if (!Array.isArray(incomingData)) {
+
     return res.status(400).send({
       error: 'data format need to be an array',
     });
@@ -47,6 +49,7 @@ pricesRouter.post('/', async (req, res) => {
 
   const properties = ['timeStamp', 'price'];
   const check = incomingData.every((entry) => properties.every((property) => property in entry && typeof entry[property] === 'number'));
+
   if (!check) {
     return res.status(400).send({
       error: 'data format is wrong',

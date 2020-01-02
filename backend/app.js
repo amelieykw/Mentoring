@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import 'express-async-errors';
 
-import prices from './routes';
+import routes from './routes';
 
 export default () => {
   const app = express();
@@ -10,6 +10,6 @@ export default () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  app.use('/', prices);
+  app.use('/', routes);
   return app;
 };
