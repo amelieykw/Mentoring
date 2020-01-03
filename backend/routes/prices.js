@@ -1,4 +1,5 @@
 import express from 'express';
+import 'express-async-errors';
 
 import prices from '../db';
 
@@ -48,7 +49,6 @@ pricesRouter.post('/', async (req, res) => {
 
   const properties = ['timeStamp', 'price'];
   const check = incomingData.every((entry) => properties.every((property) => property in entry && typeof entry[property] === 'number'));
-
   if (!check) {
     return res.status(400).send({
       error: 'data format is wrong',
