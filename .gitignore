@@ -3,11 +3,8 @@ logs
 *.log	
 npm-debug.log*	
 yarn-debug.log*	
- @moonavw
-moonavw 44 minutes ago Collaborator
-the auto generated gitignore is good enough to go, no need to change
+yarn-error.log*
 
-@Jeffzholy	Reply…
 yarn-error.log*	
 lerna-debug.log*	
 
@@ -111,3 +108,6 @@ dist
 
 .DS_Store
 dist/
+coverage/
+__snapshots__
+.snap
