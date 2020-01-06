@@ -1,18 +1,17 @@
-
 function copyObject(object) {
   return JSON.parse(JSON.stringify(object));
 }
 
-class DataArrayWithObserver {
+class ObservableDataSet {
   constructor() {
     this._observers = [];
     this._dataObjects = [];
   }
 
   add(data) {
-    this._dataObjects.push(data);
+    this._dataObjects.push(...data);
     this._update(data);
-    return copyObject(data);
+    return copyObject(this._dataObjects);
   }
 
   getAll() {
@@ -28,4 +27,4 @@ class DataArrayWithObserver {
   }
 }
 
-export default DataArrayWithObserver;
+export default ObservableDataSet;

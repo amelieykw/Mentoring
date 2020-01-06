@@ -1,15 +1,13 @@
 import express from 'express';
 
-import prices from '../db';
+import service from '../service';
 
 const pricesRouter = express.Router();
-
-const getPricesFromDB = async () => prices;
 
 pricesRouter.get('/', async (req, res) => {
   let pricesData = null;
 
-  pricesData = await getPricesFromDB();
+  pricesData = await service.getPricesFromDB();
 
   if (!pricesData) throw Error('get data from db error');
 
@@ -25,11 +23,6 @@ pricesRouter.get('/', async (req, res) => {
     data: pricesData,
   });
 });
-
-const saveNewPricesToDB = async (newPrices) => {
-  newPrices.forEach((newPrice) => prices.push(newPrice));
-  return prices;
-};
 
 pricesRouter.post('/', async (req, res) => {
   const incomingData = req.body;
@@ -54,7 +47,7 @@ pricesRouter.post('/', async (req, res) => {
     });
   }
 
-  const outgoingData = await saveNewPricesToDB(incomingData);
+  const outgoingData = await service.saveNewPricesToDB(incomingData);
 
   if (!outgoingData) throw Error('save data to db error');
 
