@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import server from './app';
 
-import prices from './db';
+import prices from './testDBpricesData';
 
 import service from './service';
 
