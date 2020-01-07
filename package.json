@@ -1,7 +1,6 @@
 {
   "name": "Mentoring",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:Jeffzholy/Mentoring.git",
   "license": "MIT",
   "scripts": {
@@ -9,13 +8,15 @@
     "lint-fix": "eslint --fix ./",
     "test": "jest",
     "test-watch": "jest --watch",
-    "build": "yarn build-frontend && yarn build-backend",
-    "build-backend": "babel backend/server.js -d dist/backend",
-    "start-backend": "node dist/backend/server.js",
-    "dev-backend": "nodemon -r @babel/register backend/server.js",
+    "build": "yarn build-backend && yarn build-frontend",
     "build-frontend": "webpack --config webpack.config.prod.js",
+    "build-backend": "babel backend/ -d dist/backend",
     "dev-frontend": "webpack-dev-server --config webpack.config.dev.js --open",
-    "newman": "newman run collection.json --delay-request 5000"
+    "dev-backend": "nodemon -r @babel/register backend/server.js",
+    "newman": "newman run collection.json --delay-request 5000",
+    "start": "node dist/backend/server.js",
+    "heroku-prebuild":"",
+    "heroku-postbuild":"yarn build"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
