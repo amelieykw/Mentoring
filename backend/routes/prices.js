@@ -19,9 +19,7 @@ pricesRouter.get('/', async (req, res) => {
 
   res.set('count', pricesData.length);
 
-  return res.status(200).send({
-    data: pricesData,
-  });
+  return res.status(200).send(pricesData);
 });
 
 pricesRouter.post('/', async (req, res) => {

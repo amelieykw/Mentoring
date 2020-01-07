@@ -24,7 +24,7 @@ describe('test /prices routes', () => {
 
       expect(service.getPricesFromDB).toHaveBeenCalledTimes(1);
       expect(response.status).toBe(200);
-      expect(response.body.data).toStrictEqual(prices);
+      expect(response.body).toStrictEqual(prices);
     });
   });
 
