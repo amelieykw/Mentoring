@@ -1,19 +1,19 @@
-import DataArrayWithObserver from './DataArrayWithObserver';
+import ObservableDataSet from './ObservableDataSet';
 
-describe('Test DataArrayWithObserver class', () => {
-  const addData = { timeStamp: 1577428735800, price: 400 };
+describe('Test ObservableDataSet class', () => {
+  const addData = [{ timeStamp: 1577428735800, price: 400 }];
   let dataset;
 
   beforeEach(() => {
-    dataset = new DataArrayWithObserver();
+    dataset = new ObservableDataSet();
   });
 
   it('Test add function', () => {
-    expect(dataset.add(addData)).toStrictEqual(addData);
+    expect(dataset.add(addData)).toStrictEqual([...addData]);
   });
   it('Test getAll function', () => {
     dataset.add(addData);
-    expect(dataset.getAll()).toStrictEqual([addData]);
+    expect(dataset.getAll()).toStrictEqual([...addData]);
   });
   it('Test addObserver function', () => {
     let updatedData;
