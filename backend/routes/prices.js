@@ -1,13 +1,11 @@
 import express from 'express';
-
-import service from '../service';
+import errorHandler from 'api-error-handler';
+import * as pricesService from '../service';
 
 const pricesRouter = express.Router();
 
 pricesRouter.get('/', async (req, res) => {
-  let pricesData = null;
-
-  pricesData = await service.getPricesFromDB();
+  const pricesData = await pricesService.getPricesFromDB();
 
   if (!pricesData) throw Error('get data from db error');
 
@@ -47,17 +45,13 @@ pricesRouter.post('/', async (req, res) => {
     });
   }
 
-  const outgoingData = await service.saveNewPricesToDB(incomingData);
+  const outgoingData = await pricesService.saveNewPricesToDB(incomingData);
 
   if (!outgoingData) throw Error('save data to db error');
 
   return res.status(201).send(outgoingData);
 });
 
-pricesRouter.use((err, req, res, next) => {
-  res.status(403);
-  res.json({ error: err.message });
-  next(err);
-});
+pricesRouter.use(errorHandler());
 
 export default pricesRouter;

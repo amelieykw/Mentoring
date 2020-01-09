@@ -1,9 +1,5 @@
-import ObservableDataSet from './db/ObservableDataSet';
+import Singleton from './db/SingletonObservableDataSet';
 
-const dbOperations = new ObservableDataSet();
+export const getPricesFromDB = async () => Singleton.getInstance().getAll();
 
-const getPricesFromDB = async () => dbOperations.getAll();
-
-const saveNewPricesToDB = async (newPrices) => dbOperations.add(newPrices);
-
-export default { getPricesFromDB, saveNewPricesToDB };
+export const saveNewPricesToDB = async (newPrices) => Singleton.getInstance().add(newPrices);

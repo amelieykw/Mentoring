@@ -1,28 +1,27 @@
 import supertest from 'supertest';
-import server from './app';
+import server from '../app';
 
-import prices from './testDBpricesData';
+import prices from '../testDBpricesData';
 
-import service from './service';
+import * as pricesService from '../service';
 
-jest.mock('./service');
+jest.mock('../service');
 
 describe('test /prices routes', () => {
   const app = server();
 
   let request;
-
   beforeEach(() => {
     request = supertest(app);
   });
 
   describe('GET /prices', () => {
     it('when success, responds json : status code 200, an array of data which is all current prices', async () => {
-      service.getPricesFromDB.mockReturnValue(prices);
+      pricesService.getPricesFromDB.mockImplementation(() => prices);
 
       const response = await request.get('/prices');
 
-      expect(service.getPricesFromDB).toHaveBeenCalledTimes(1);
+      expect(pricesService.getPricesFromDB).toHaveBeenCalledTimes(1);
       expect(response.status).toBe(200);
       expect(response.body.data).toStrictEqual(prices);
     });
@@ -60,7 +59,7 @@ describe('test /prices routes', () => {
       const newData = [{ timeStamp: 325, price: 3243 }, { timeStamp: 1000, price: 100 }];
       const previousPricesData = JSON.parse(JSON.stringify(prices));
 
-      service.saveNewPricesToDB.mockImplementation((data) => {
+      pricesService.saveNewPricesToDB.mockImplementation((data) => {
         previousPricesData.push(...data);
         return previousPricesData;
       });
@@ -69,9 +68,8 @@ describe('test /prices routes', () => {
         .post('/prices')
         .send(newData);
 
-      expect(service.saveNewPricesToDB).toHaveBeenCalledTimes(1);
+      expect(pricesService.saveNewPricesToDB).toHaveBeenCalledTimes(1);
       expect(response.status).toBe(201);
-      // eslint-disable-next-line max-len
       expect(response.body).toStrictEqual(previousPricesData);
     });
   });
