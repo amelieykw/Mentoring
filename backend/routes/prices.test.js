@@ -16,7 +16,7 @@ describe('test /prices routes', () => {
   });
 
   describe('GET /prices', () => {
-    it('when success, responds json : status code 200, an array of data which is all current prices!', async () => {
+    it('when success, responds json : status code 200, an array of data which is all current prices', async () => {
       pricesService.getPricesFromDB.mockImplementation(() => prices);
 
       const response = await request.get('/prices');
