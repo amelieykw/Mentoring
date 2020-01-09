@@ -5,6 +5,7 @@ import prices from '../testDBpricesData';
 
 import * as pricesService from '../service';
 
+jest.mock('../db/SingletonObservableDataSet');
 jest.mock('../service');
 
 describe('test /prices routes', () => {
