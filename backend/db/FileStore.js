@@ -22,8 +22,9 @@ export default function (object) {
     add(loadArrayFromFile(filePath));
 
     observableDataset.add = (...args) => {
-      add(args);
+      const res = add(...args);
       saveArrayToFile(getAll(), filePath);
+      return res;
     };
   };
 }
