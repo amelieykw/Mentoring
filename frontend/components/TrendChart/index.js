@@ -11,7 +11,7 @@ function TrendChart() {
   useEffect(() => {
     async function fetchData() {
       const data = await fetchWithHeaders(URL.PRICES);
-      setChartData(data ? dataConvert(data) : dataConvert({ data: mockData }));
+      setChartData(dataConvert(data || mockData));
     }
     fetchData();
   }, []);

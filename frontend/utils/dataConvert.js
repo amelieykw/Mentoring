@@ -1,7 +1,7 @@
 function temporaryDataConvert(datasToConvert) {
   const convertedData = { labels: [], datasets: [{ label: '', data: [] }] };
-  if (datasToConvert.data && datasToConvert.data.length) {
-    datasToConvert.data.forEach((data) => {
+  if (datasToConvert && datasToConvert.length) {
+    datasToConvert.forEach((data) => {
       convertedData.labels.push(data.timeStamp);
       convertedData.datasets[0].data.push(data.price);
     });
