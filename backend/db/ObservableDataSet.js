@@ -1,6 +1,6 @@
-function copyObject(object) {
-  return JSON.parse(JSON.stringify(object));
-}
+import utils from './utils';
+
+const { copyObject } = utils;
 
 class ObservableDataSet {
   constructor() {

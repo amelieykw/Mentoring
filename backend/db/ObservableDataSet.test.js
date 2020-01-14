@@ -1,8 +1,12 @@
+import fs from 'fs';
 import ObservableDataSet from './ObservableDataSet';
+
+jest.mock('fs');
 
 describe('Test ObservableDataSet class', () => {
   const addData = [{ timeStamp: 1577428735800, price: 400 }];
   let dataset;
+  fs.readFileSync.mockReturnValue('[]');
 
   beforeEach(() => {
     dataset = new ObservableDataSet();
@@ -16,9 +20,9 @@ describe('Test ObservableDataSet class', () => {
     expect(dataset.getAll()).toStrictEqual([...addData]);
   });
   it('Test addObserver function', () => {
-    let updatedData;
-    dataset.addObserver({ update: (data) => { updatedData = data; } });
+    const cb = { update: jest.fn() };
+    dataset.addObserver(cb);
     dataset.add(addData);
-    expect(updatedData).toEqual(addData);
+    expect(cb.update.mock.calls.length).toBe(1);
   });
 });
