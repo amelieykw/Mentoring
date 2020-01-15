@@ -1,5 +1,5 @@
 import registePricesRouter from './prices';
 
-export default (app) => {
-  app.use('/prices', registePricesRouter());
+export default (app, wss) => {
+  app.use('/prices', registePricesRouter(wss));
 };
