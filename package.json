@@ -15,7 +15,7 @@
     "dev-backend": "nodemon -r @babel/register backend/server.js",
     "build-frontend": "webpack --config webpack.config.prod.js",
     "dev-frontend": "webpack-dev-server --config webpack.config.dev.js --open",
-    "newman": "newman run collection.json --delay-request 5000"
+    "newman": "newman run collection.json --env-var url=\"https://emerald-mentoring.herokuapp.com\" --env-var path=\"prices\" --delay-request 5000"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",

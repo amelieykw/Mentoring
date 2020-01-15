@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "09db30c8-7657-4320-908e-89d61b23b9e8",
-		"name": "postCollections",
+		"name": "postDataCollections",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -19,7 +19,7 @@
 							"",
 							"const body = [{timeStamp, price}]",
 							"",
-							"pm.globals.set(\"body\",JSON.stringify(body))"
+							"pm.environment.set('body',JSON.stringify(body))"
 						],
 						"type": "text/javascript"
 					}
@@ -58,14 +58,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/prices",
-					"protocol": "http",
+					"raw": "{{url}}/{{path}}",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "3000",
 					"path": [
-						"prices"
+						"{{path}}"
 					]
 				}
 			},
