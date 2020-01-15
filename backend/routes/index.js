@@ -1,5 +1,5 @@
-import pricesRouter from './prices';
+import registePricesRouter from './prices';
 
 export default (app) => {
-  app.use('/prices', pricesRouter);
+  app.use('/prices', registePricesRouter());
 };

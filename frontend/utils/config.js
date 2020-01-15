@@ -1,4 +1,4 @@
-const BASE = 'http://localhost:3000/api';
+const BASE = 'http://localhost:3000';
 
 const URL = {
   PRICES: `${BASE}/prices`,
