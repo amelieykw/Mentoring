@@ -9,7 +9,7 @@ describe('dataConvert', () => {
       },
     ]);
     expect(dataConverted).toStrictEqual({
-      labels: [1],
+      labels: [new Date(1).toLocaleTimeString()],
       datasets: [{ label: 'Data From Fetch', data: [100] }],
     });
   });
