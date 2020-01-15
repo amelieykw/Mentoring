@@ -2,11 +2,15 @@
 import createError from 'http-errors';
 import httpMocks from 'node-mocks-http';
 import events from 'events';
+import { Router } from 'express';
+
 import prices from '../testDBpricesData';
 import { pricesGetHandler, pricesPostHandler } from './pricesHandler';
 import { getPricesFromDB, saveNewPricesToDB } from '../service';
+import createPricesRouter from './prices';
 
 jest.mock('../service');
+jest.mock('express');
 
 describe('test /prices routes', () => {
   describe('GET /prices', () => {
@@ -78,6 +82,27 @@ describe('test /prices routes', () => {
 
       expect(result.statusCode).toBe(201);
       expect(result._getData()).toStrictEqual(previousPricesData);
+    });
+  });
+
+  describe('test route /prices', () => {
+    it('all the request handlers of prices router should be called correctly', () => {
+      const mockRouter = {
+        get: jest.fn(),
+        post: jest.fn(),
+        ws: jest.fn(),
+        use: jest.fn(),
+      };
+
+      Router.mockReturnValue(mockRouter);
+
+      const wss = {};
+
+      const finalRouter = createPricesRouter(wss);
+      expect(finalRouter).toEqual(mockRouter);
+      expect(mockRouter.get).toHaveBeenCalledWith('/', expect.any(Function));
+      expect(mockRouter.post).toHaveBeenCalledWith('/', expect.any(Function));
+      expect(mockRouter.ws).toHaveBeenCalledWith('/', expect.any(Function));
     });
   });
 });
