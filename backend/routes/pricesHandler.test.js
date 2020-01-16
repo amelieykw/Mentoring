@@ -85,13 +85,12 @@ describe('test /prices routes', () => {
     });
   });
 
-  describe('test route /prices', () => {
+  describe('test route /prices is registered', () => {
     it('all the request handlers of prices router should be called correctly', () => {
       const mockRouter = {
         get: jest.fn(),
         post: jest.fn(),
         ws: jest.fn(),
-        use: jest.fn(),
       };
 
       Router.mockReturnValue(mockRouter);
@@ -100,8 +99,8 @@ describe('test /prices routes', () => {
 
       const finalRouter = createPricesRouter(wss);
       expect(finalRouter).toEqual(mockRouter);
-      expect(mockRouter.get).toHaveBeenCalledWith('/', expect.any(Function));
-      expect(mockRouter.post).toHaveBeenCalledWith('/', expect.any(Function));
+      expect(mockRouter.get).toHaveBeenCalledWith('/', pricesGetHandler);
+      expect(mockRouter.post).toHaveBeenCalledWith('/', pricesPostHandler);
       expect(mockRouter.ws).toHaveBeenCalledWith('/', expect.any(Function));
     });
   });

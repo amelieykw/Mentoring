@@ -2,20 +2,24 @@ import express from 'express';
 import { pricesGetHandler, pricesPostHandler } from './pricesHandler';
 import { addObserver } from '../service';
 
-export default (wss) => {
-  const pricesRouter = express.Router();
-
+export const registerWss = (wss) => {
   const wssObj = {
-    wss,
-    update(data) {
-      this.wss.clients.forEach((client) => {
+    update: (data) => {
+      wss.clients.forEach((client) => {
         client.send(JSON.stringify(data));
       });
     },
   };
-
   addObserver(wssObj);
 
+  return wssObj;
+};
+
+
+export default (wss) => {
+  const pricesRouter = express.Router();
+
+  registerWss(wss);
   pricesRouter.get('/', pricesGetHandler);
   pricesRouter.post('/', pricesPostHandler);
   pricesRouter.ws('/', () => { });
