@@ -3,7 +3,7 @@ function dataConvert(defaultData, rawData, label) {
 
   if (rawData && rawData.length) {
     rawData.forEach((data) => {
-      convertedData.labels.push(data.timeStamp);
+      convertedData.labels.push(new Date(data.timeStamp).toLocaleTimeString());
       convertedData.datasets[0].data.push(data.price);
     });
     convertedData.datasets[0].label = label;

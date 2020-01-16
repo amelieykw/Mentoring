@@ -1,5 +1,6 @@
+/* eslint-disable no-restricted-globals */
 const WS_URL = {
-  PRICES: `ws://${process.env.BASE_URL || window.location.host}/prices`,
+  PRICES: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/prices`,
 };
 
 const URL = {

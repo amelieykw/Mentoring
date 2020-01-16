@@ -12,7 +12,7 @@ describe('dataConvert', () => {
     const dataConverted = dataConvert(DEFAULT_DATA, rawData, 'Data From Fetch');
 
     expect(dataConverted).toStrictEqual({
-      labels: [1],
+      labels: [new Date(1).toLocaleTimeString()],
       datasets: [{ label: 'Data From Fetch', data: [100] }],
     });
   });

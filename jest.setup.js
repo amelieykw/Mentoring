@@ -14,6 +14,6 @@ class worker {
   }
 }
 global.Worker = worker;
-global.window = {
+global.location = {
   location: {},
 };

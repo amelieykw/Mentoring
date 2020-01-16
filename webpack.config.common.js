@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const WorkerPlugin = require('worker-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './frontend/index.js',
@@ -26,5 +28,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'frontend/index.html',
     }),
+    new WorkerPlugin({ globalObject: 'self' }),
+    new Dotenv(),
   ],
 };
