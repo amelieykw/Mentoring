@@ -1,6 +1,7 @@
 import socketClient from './socketClient';
 import dataProcesser from './dataProcesser';
-import { DEFAULT_DATA } from '../config';
+import { DEFAULT_DATA, URL } from '../config';
+import fetchWithHeaders from '../utils/fetchWithHeaders';
 
 let chartData;
 let ws;
@@ -15,6 +16,10 @@ console.log('worker on connection');
 onmessage = ({ data }) => {
   switch (data) {
     case 'start':
+      fetchWithHeaders(URL.PRICES)
+        .then((result) => {
+          recivedMessageFromSocket(result);
+        });
       ws = socketClient((newData) => recivedMessageFromSocket(newData));
       break;
     case 'close':
