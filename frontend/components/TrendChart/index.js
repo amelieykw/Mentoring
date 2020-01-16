@@ -1,32 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import { ClipLoader } from 'react-spinners';
-import dataConvert from '../../utils/dataConvert';
-import fetchWithHeaders from '../../utils/fetchWithHeaders';
-import URL from '../../utils/config';
-import mockData from '../../utils/mockData';
+import { DEFAULT_DATA } from '../../config';
 
-function TrendChart() {
-  const [chartData, setChartData] = useState({});
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchWithHeaders(URL.PRICES);
-      setChartData(data ? dataConvert(data) : dataConvert({ data: mockData }));
-    }
-    fetchData();
-  }, []);
+class TrendChart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { chartData: JSON.parse(DEFAULT_DATA) };
+  }
 
-  return (
-    <div>
-      {chartData && chartData.datasets ? (
-        <Line width={800} height={500} data={chartData} options={{ maintainAspectRatio: false }} />
-      ) : (
-        <div>
-          <ClipLoader size={150} color="#123abc" loading />
-        </div>
-      )}
-    </div>
-  );
+  componentDidMount() {
+    this.worker = new Worker('../../helpers/workerClient', { type: 'module' });
+
+    this.worker.onmessage = ({ data }) => {
+      this.setState({
+        chartData: data,
+      });
+    };
+
+    this.worker.onerror = (error) => {
+      console.log(`worker error: ${error}`);
+    };
+
+    this.worker.postMessage('start');
+  }
+
+  componentWillUnmountMount() {
+    this.worker.postMessage('close');
+    setTimeout(() => {
+      console.log('worker close connection');
+      this.worker.terminate();
+    }, 200);
+  }
+
+  render() {
+    const { chartData } = this.state;
+    return (
+      <div>
+        {chartData && chartData.datasets ? (
+          <Line
+            width={800}
+            height={500}
+            data={chartData}
+            options={{ maintainAspectRatio: false, animation: false }}
+          />
+        ) : (
+          <div>
+            <ClipLoader size={150} color="#123abc" loading />
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 export default TrendChart;
