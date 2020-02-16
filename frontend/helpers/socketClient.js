@@ -4,7 +4,6 @@ function socketClient(postMessageFunc) {
   console.log(WS_URL.PRICES);
   const ws = new WebSocket(WS_URL.PRICES);
 
-
   ws.onopen = () => {
     console.log('socket on connection');
   };
